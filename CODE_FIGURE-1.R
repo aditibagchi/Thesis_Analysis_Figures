@@ -41,11 +41,17 @@ scales::
 ggrepel::
 RColorBrewer::
 grid::
+  
+  cols <- c("C>A" = "blue4", "C>G" = "grey66", "C>T" = "green4", "T>A" = "goldenrod2", "T>C" = "gray33", "T>G" = "red3")
 
 X <- ggplot(Medulloblastoma, aes(Medulloblastoma$Name, Medulloblastoma$Total.Mutation.Burden))
 Y <- X + geom_bar(stat = "identity", aes(fill = TYPE))+ 
   scale_y_continuous(name="Mutations per Mb", limits=c(0, 40)) + theme_minimal() + xlab("Tumor")+
   scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 8, angle = 90))
 
-
-
+Subsitutions <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Subsitutions_Final.csv")
+View(Subsitutions)
+ggplot(data= Subsitutions, aes(x=Subsitutions$Name, y=Subsitutions$Fraction, fill=Subsitution)) +
+  geom_bar(stat="identity") +  scale_y_continuous(name="Fraction Subsitutions") + theme_minimal()+
+  scale_fill_manual(values = cols)+
+  theme(axis.text.x = element_text(face = "bold", color = "black", size = 12, angle = 90)) + xlab("Tumor")
