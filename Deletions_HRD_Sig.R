@@ -246,37 +246,37 @@ RM <- read.maf(maf = "/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/All_MA
 RM_Variants <- mafSummary(RM)
 RM_Variants_Type <- RM_Variants$variant.type.summary
 RM_Variants_Type <- RM_Variants_Type[-c(3,4,7,9,10,16,25,26,27),]
+RM_Variants_Type <- RM_Variants_Type[-c(11),]
 
 ##View(RM_Variants_Type)
 
 RM_Variants_Type$Name <- c("Tumor10", "Tumor1", "Tumor24","Tumor25","Tumor5",
-                           "Tumor6","Tumor26","Tumor27","Tumor7","Tumor28", "Tumor29", "Tumor30","Tumor31", "Tumor32", "Tumor33",
+                           "Tumor6","Tumor26","Tumor27","Tumor7","Tumor28", "Tumor30","Tumor31", "Tumor32", "Tumor33",
                            "Tumor34", "Tumor35", "Tumor36", "Tumor37", "Tumor38", "Tumor39", "Tumor40", "Tumor41","Tumor42", "Tumor43")
 RM_Variants_Type$Indel <- RM_Variants_Type$DEL + RM_Variants_Type$INS
 RM_Variants_Type$IndelFR <- RM_Variants_Type$Indel/RM_Variants_Type$total
-RM_Variants_Type$Sig3 <- c(0.0, 0.0, 0.0, 0.0179, 0.21, 0.208, 0.327, 0.107, 0.14, 0.24, T-29, 0.352, 0.207, 0.157, 0.0,0.283,0.0, 0.224, 0.0, 0.084, 0.0, 0.0, 0.275, 0.0)
-RM_Variants_Type$Sig8 <- c(0.0, 0.0, 0.0, 0.074, 0.182, 0.232, 0.254, 0.094, 0.175, 0.232,T-29, 0.0, 0.0, 0.147, 0.0, 0.0, 0.0, 0.16, 0.253, 0.154, 0.0, 0.0, 0.0, 0.149) 
+RM_Variants_Type$Sig3 <- c(0.0, 0.0, 0.0, 0.0179, 0.21, 0.208, 0.327, 0.107, 0.14, 0.24, 0.352, 0.207, 0.157, 0.0,0.283,0.0, 0.224, 0.0, 0.084, 0.0, 0.0,0.0, 0.275, 0.0)
+RM_Variants_Type$Sig8 <- c(0.0, 0.0, 0.0, 0.074, 0.182, 0.232, 0.254, 0.094, 0.175, 0.232, 0.0, 0.0, 0.147, 0.0, 0.0, 0.0, 0.16, 0.253, 0.154, 0.0, 0.0, 0.181, 0.0, 0.149) 
 RM_Variants_Type$HRD <- RM_Variants_Type$Sig3 + RM_Variants_Type$Sig8
 View(RM_Variants_Type)
 write.csv(RM_Variants_Type, file = "RM_Variants_Type.csv")
 
 #lenght of deletions
-RM_Germline_DF <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/9_recurrent_germline_samples_GRCH38_crossmapped_to_GRCH37.maf.txt", 
+RM_Variants_DF <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/All_MAF_FILES/Primary_recurrent_reduced_maf_final.txt", 
                              header=TRUE, comment.char="#")
-#View(RM_Germline_DF)
+#View(RM_Variants_DF)
 #To identify the lenght of deletions; substarct endposition from start postion; first subset one tumor and then substet all deletions within the tumor.
-RM_Germline_DF_MB_15 <- subset(RM_Germline_DF, RM_Germline_DF$Tumor_Sample_Barcode == "MB-REC-15")
-RM_Germline_DF_MB_15_del <- subset(RM_Germline_DF_MB_15, RM_Germline_DF_MB_15$Variant_Type == "DEL")
-#View(RM_Germline_DF_MB_15_del)
-RM_Germline_DF_MB_15_del$Del_Len <- RM_Germline_DF_MB_15_del$End_Position - RM_Germline_DF_MB_15_del$Start_Position
-#View(RM_Germline_DF_MB_15_del)
-median(RM_Germline_DF_MB_15_del$Del_Len)
-mean(RM_Germline_DF_MB_15_del$Del_Len)
-RM_Germline_DF_MB_15_del$LargeDel = ifelse(RM_Germline_DF_MB_15_del$Del_Len>=5,TRUE,FALSE)
-RM_Germline_DF_MB_15_del_large = RM_Germline_DF_MB_15_del[RM_Germline_DF_MB_15_del$LargeDel==TRUE,]
-#View(RM_Germline_DF_MB_15_del_large)
-write.csv(RM_Germline_DF_MB_15_del_large, file = "RM_Germline_DF_MB_15_del_large.csv")
-write.csv(RM_Germline_DF_MB_15_del, file = "RM_Germline_DF_MB_15_del.csv")
+RM_Variants_DF_MB_29 <- subset(RM_Variants_DF, RM_Variants_DF$Tumor_Sample_Barcode == "MB-REC-29")
+RM_Variants_DF_MB_29_del <- subset(RM_Variants_DF_MB_29, RM_Variants_DF_MB_29$Variant_Type == "DEL")
+View(RM_Variants_DF_MB_29_del)
+RM_Variants_DF_MB_29_del$Del_Len <- RM_Variants_DF_MB_29_del$End_Position - RM_Variants_DF_MB_29_del$Start_Position
+#View(RM_Variants_DF_MB_01_del)
+
+RM_Variants_DF_MB_29_del$LargeDel = ifelse(RM_Variants_DF_MB_29_del$Del_Len>=5,TRUE,FALSE)
+RM_Variants_DF_MB_29_del_large = RM_Variants_DF_MB_29_del[RM_Variants_DF_MB_29_del$LargeDel==TRUE,]
+View(RM_Variants_DF_MB_29_del_large)
+write.csv(RM_Variants_DF_MB_29_del_large, file = "RM_Variants_DF_MB_29_del_large.csv")
+write.csv(RM_Variants_DF_MB_29_del, file = "RM_Variants_DF_MB_29_del.csv")
 
 
 
