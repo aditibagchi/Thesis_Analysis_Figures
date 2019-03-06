@@ -17,14 +17,15 @@ X <- ggplot(data= Signature, aes(x=Signature$Type, y=Signature$Fraction, fill= S
   geom_bar(stat="identity") +  scale_y_continuous(name="Fraction Contribution") + theme_minimal()+
   scale_fill_manual(values = cols)+
   theme(axis.text.x = element_text(color = "black", size = 8, angle = 90)) + xlab("Tumor")
- S <- X+facet_wrap(~Name)
+ S <- X+facet_wrap(~Name) + ggtitle("A")
 
  ##Plot2 with only recurrent cases 
  SignatureR <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Signatures_recurrent.csv")
  R <- ggplot(data= SignatureR, aes(x=SignatureR$Name, y=SignatureR$Fraction, fill= Signatures)) +
    geom_bar(stat="identity") +  scale_y_continuous(name="Fraction Contribution") + theme_minimal()+
    scale_fill_manual(values = cols)+
-   theme(axis.text.x = element_text(color = "black", size = 8, angle = 90)) + xlab("Tumor") 
+   theme(axis.text.x = element_text(color = "black", size = 8, angle = 90)) + xlab("Tumor") + ggtitle("B")
  ##Arranging figures in one page
  Figure2 <- grid.arrange(S, R, top = textGrob("Figure2", gp=gpar(fontsize=18, fon=3)))
+ Figure2
  
