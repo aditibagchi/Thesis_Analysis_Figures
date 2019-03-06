@@ -41,21 +41,26 @@ scales::
 ggrepel::
 RColorBrewer::
 grid::
-  
+gridExtra:: 
+lattice::  
   cols <- c("C>A" = "blue4", "C>G" = "grey66", "C>T" = "green4", "T>A" = "goldenrod2", "T>C" = "gray33", "T>G" = "red3")
 
 X <- ggplot(Medulloblastoma, aes(Medulloblastoma$Name, Medulloblastoma$Total.Mutation.Burden))
 Y <- X + geom_bar(stat = "identity", aes(fill = Type))+ 
   scale_y_continuous(name="Mutations per Mb", limits=c(0, 40)) + theme_minimal() + xlab("Tumor")+
-  scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 8, angle = 90))
+  scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 6, angle = 90)) + ggtitle("A")
 
 Subsitutions <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Subsitutions_Final.csv")
 View(Subsitutions)
 M <- ggplot(data= Subsitutions, aes(x=Subsitutions$Name, y=Subsitutions$Fraction, fill=Subsitution)) +
   geom_bar(stat="identity") +  scale_y_continuous(name="Fraction Subsitutions") + theme_minimal()+
   scale_fill_manual(values = cols)+
-  theme(axis.text.x = element_text(color = "black", size = 8, angle = 90)) + xlab("Tumor")
+  theme(axis.text.x = element_text(color = "black", size = 6, angle = 90)) + xlab("Tumor") + ggtitle("C")
+
+#leaving empty space
+CNV_Data <- textGrob("CNV_Data_figure1D")
+Oncoplot <- textGrob("Oncoplot_figure1B")
 
 ##laying out multiple plots in each page
-Figure1 <- grid.arrange(Y, M, top = textGrob("Figure1", gp=gpar(fontsize=18, fon=3)))
+Figure1 <- grid.arrange(Y,Oncoplot,M,CNV_Data,top = textGrob("Figure1", gp=gpar(fontsize=18, fon=3)), ncol=1)
 Figure1
