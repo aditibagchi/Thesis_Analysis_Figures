@@ -74,7 +74,7 @@ write.csv(PM_Germline_DF_MB_XX_del_large, file = "PM_Germline_DF_MB_XX_del_large
 write.csv(PM_Germline_DF_MB_XX_del, file = "PM_Germline_DF_MB_XX_del.csv")
 
 ##MB_REC_16 primary 
-PM_Germline_16 <- read.maf(maf = "/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/MB-REC-16_primary.crossmap.hg38_to_hg19.vep.maf.txt")
+PM_Germline_16 <- read.maf( maf = "/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/ALL_MAF_FILES/MB-REC-16_primary.crossmap.hg38_to_hg19.vep.maf.txt")
 PM_Germline_Variants_16 <- mafSummary(PM_Germline_16)
 
 PM_Germline_Variants_Type_16 <- PM_Germline_Variants_16$variant.type.summary
@@ -89,15 +89,13 @@ write.csv(PM_Germline_Variants_Type_16, file = "PM_Germline_Variants_Type_16.csv
 PM_Germline_Variants_Type_16$Tumor_Sample_Barcode <- c("MB_REC_16")
 
 #MB_REC_16-primary and MB_REC_06 both primary and Recurrent 
-
-MB.REC.16_primary.crossmap.hg38_to_hg19.vep.maf <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/MB-REC-16_primary.crossmap.hg38_to_hg19.vep.maf.txt", header=FALSE, comment.char="#")
 #lenght of deletions
-PM_Germline_DF_16 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/MB-REC-16_primary.crossmap.hg38_to_hg19.vep.maf.txt", header=TRUE, comment.char="#")
+PM_Germline_DF_16 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/ALL_MAF_FILES/MB-REC-16_primary.crossmap.hg38_to_hg19.vep.maf.txt", header=TRUE, comment.char="#")
 View(PM_Germline_DF_16)
 PM_Germline_DF_16$Tumor_Sample_Barcode <- c("MB_REC_16")
 #To identify the lenght of deletions; substarct endposition from start postion; first subset one tumor and then substet all deletions within the tumor.
-PM_Germline_DF_MB_16 <- subset(PM_Germline_DF, PM_Germline_DF$Tumor_Sample_Barcode == "MB-REC-16")
-PM_Germline_DF_MB_16_del <- subset(PM_Germline_DF_MB_16, PM_Germline_DF_MB_16$Variant_Type == "DEL")
+PM_Germline_DF_16 <- subset(PM_Germline_DF_16, PM_Germline_DF_16$Tumor_Sample_Barcode == "MB-REC-16")
+PM_Germline_DF_MB_16_del <- subset(PM_Germline_DF_16, PM_Germline_DF_16$Variant_Type == "DEL")
 View(PM_Germline_DF_MB_16_del)
 PM_Germline_DF_MB_16_del$Del_Len <- PM_Germline_DF_MB_16_del$End_Position - PM_Germline_DF_MB_16_del$Start_Position
 PM_Germline_DF_MB_16_del$LargeDel = ifelse(PM_Germline_DF_MB_16_del$Del_Len>=5,TRUE,FALSE)
@@ -124,9 +122,9 @@ RM_Germline_Variants_Type_06$Tumor_Sample_Barcode <- c("MB_REC_06")
 
 
 #lenght of deletions
-RM_Germline_DF_MB_06 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/MB-REC-06_recurrent_parental_germline_filtered.maf.txt", header=TRUE)
+RM_Germline_DF_MB_06 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/ALL_MAF_FILES/MB-REC-06_recurrent_parental_germline_filtered.maf.txt", header=TRUE)
 View(RM_Germline_DF_06)
-RM_Germline_DF_MB_06$Tumor_Sample_Barcode <- c("MB_REC_06")
+RM_Germline_DF_MB_06$Tumor_Sample_Barcode <- c("MB-REC-06")
 #To identify the lenght of deletions; substarct endposition from start postion; first subset one tumor and then substet all deletions within the tumor.
 
 RM_Germline_DF_MB_06_del <- subset(RM_Germline_DF_MB_06, RM_Germline_DF_MB_06$Variant_Type == "DEL")
@@ -156,11 +154,11 @@ write.csv(PM_Germline_Variants_Type_06, file = "PM_Germline_Variants_Type_06.csv
 PM_Germline_Variants_Type_06$Tumor_Sample_Barcode <- c("MB_REC_06")
 
 #lenght of deletions
-PM_Germline_DF_06 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/MB-REC-06_primary_parental_germline_filtered.maf.txt", header=TRUE)
+PM_Germline_DF_06 <- read.delim("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/ALL_MAF_FILES/MB-REC-06_primary_parental_germline_filtered.maf.txt", header=TRUE)
 View(PM_Germline_DF_06)
-PM_Germline_DF_06$Tumor_Sample_Barcode <- c("MB_REC_06")
+PM_Germline_DF_06$Tumor_Sample_Barcode <- c("MB-REC-06")
 #To identify the lenght of deletions; substarct endposition from start postion; first subset one tumor and then substet all deletions within the tumor.
-PM_Germline_DF_MB_06 <- subset(PM_Germline_DF, PM_Germline_DF$Tumor_Sample_Barcode == "MB-REC-06")
+PM_Germline_DF_MB_06 <- subset(PM_Germline_DF_06, PM_Germline_DF_06$Tumor_Sample_Barcode == "MB-REC-06")
 PM_Germline_DF_MB_06_del <- subset(PM_Germline_DF_MB_06, PM_Germline_DF_MB_06$Variant_Type == "DEL")
 View(PM_Germline_DF_MB_06_del)
 PM_Germline_DF_MB_06_del$Del_Len <- PM_Germline_DF_MB_06_del$End_Position - PM_Germline_DF_MB_06_del$Start_Position
@@ -245,10 +243,91 @@ View(RM_Variants_DF_MB_XX_del_large)
 write.csv(RM_Variants_DF_MB_XX_del_large, file = "RM_Variants_DF_MB_XX_del_large.csv")
 write.csv(RM_Variants_DF_MB_XX_del, file = "RM_Variants_DF_MB_XX_del.csv")
 
+##Combining all the data frames generated to create one DF, with large deletions, and HRD signatures. 
+##Cleaning the data for final analysis
+PM_Germline_Variants_Type_06 <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/PM_Germline_Variants_Type_06.csv", header=TRUE)
+##View(PM_Germline_Variants_Type_06)
+PM_Germline_Variants_Type_06 <- PM_Germline_Variants_Type_06[,-1]
+PM_Germline_Variants_Type_06$Type <- c("Primary")
+PM_Germline_Variants_Type_06$largeDel <- c(3301)
+M = PM_Germline_Variants_Type_06
+PM_Germline_Variants_Type_16 <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/PM_Germline_Variants_Type_16.csv")
+##View(PM_Germline_Variants_Type_16)
+PM_Germline_Variants_Type_16 <- PM_Germline_Variants_Type_16[,-1]
+PM_Germline_Variants_Type_16$Type <- c("Primary")
+PM_Germline_Variants_Type_16$largeDel <- c(3620)
+N = PM_Germline_Variants_Type_16
+
+PM_Germline_Variants_Type <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/PM_Germline_Variants_Type.csv")
+##View(PM_Germline_Variants_Type)
+PM_Germline_Variants_Type  <- PM_Germline_Variants_Type[,-1]
+PM_Germline_Variants_Type$Type  <- c("Primary")
+PM_Germline_Variants_Type$largeDel <- c(84, 38,34, 55, 93, 32, 19, 52, 31, 43, 28,33)
+O = PM_Germline_Variants_Type
+
+RM_Germline_met_Variants_Type <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/RM_Germline_met_Variants_Type.csv")
+##View(RM_Germline_met_Variants_Type)
+RM_Germline_met_Variants_Type <-RM_Germline_met_Variants_Type[,-1]
+RM_Germline_met_Variants_Type$Type <- c("Recurrent")
+RM_Germline_met_Variants_Type$LargeDel <- c(134, 130, 55, 34, 47)
+ P = RM_Germline_met_Variants_Type
 
 
+RM_Germline_Variants_Type_06 <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/RM_Germline_Variants_Type_06.csv")
+RM_Germline_Variants_Type_06 <- RM_Germline_Variants_Type_06[,-1]
+RM_Germline_Variants_Type_06$Type <- c("Recurrent")
+RM_Germline_Variants_Type_06$LargeDel <- c(555)
+
+Q = RM_Germline_Variants_Type_06
+
+RM_Germline_Variants_Type <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/RM_Germline_Variants_Type.csv")
+
+RM_Germline_Variants_Type$Sig3 <- c(0.208, 0.176, 0.130, 0.074, 0.264, 0.101, 0.098, 0.198, 0.066)
+RM_Germline_Variants_Type$Sig8 <- c(0.371, 0.334, 0.265, 0.170, 0.000, 0.184, 0.304, 0.162, 0.151)
+RM_Germline_Variants_Type$HRD <- RM_Germline_Variants_Type$Sig3 + RM_Germline_Variants_Type$Sig8
+RM_Germline_Variants_Type$Type <- c("Recurrent")
+RM_Germline_Variants_Type$LargeDel <- c(466, 237, 332, 252, 207, 193, 44, 139, 42)
+RM_Germline_Variants_Type <- RM_Germline_Variants_Type[,-1]
+ R = RM_Germline_Variants_Type
+
+RM_Variants_Type <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Thesis/Thesis_Analysis_Figures/Deletions_ICGC_All_Samples/RM_Variants_Type.csv")
+RM_Variants_Type
+RM_Variants_Type <- RM_Variants_Type[,-1]
+RM_Variants_Type$Type <- c("Recurrent")
+RM_Variants_Type$LargeDel <- c(171, 71, 99, 265, 225, 295, 138, 32, 142, 37, 112, 57, 175, 149, 28, 99, 171, 91, 38, 57, 50, 31, 53, 34)
+
+ S = RM_Variants_Type
+ 
+ 
+
+##joining all the 7 data frames to create one DF 
+Final_HRD_DEl <- rbind.data.frame(PM_Germline_Variants_Type_06,PM_Germline_Variants_Type_16,PM_Germline_Variants_Type, RM_Germline_met_Variants_Type, RM_Germline_Variants_Type_06, RM_Germline_Variants_Type, RM_Variants_Type)
+Y = rbind(M,N,O)
+X = rbind(P,Q,R,S)
+names(Y)
+[1] "Tumor_Sample_Barcode" "DEL"                  "INS"                  "SNP"                 
+[5] "total"                "Name"                 "Indel"                "IndelFR"             
+[9] "Sig3"                 "Sig8"                 "HRD"                  "Type"                
+[13] "largeDel"   
+
+names(X)
+[1] "Tumor_Sample_Barcode" "DEL"                  "INS"                  "SNP"                 
+[5] "total"                "Name"                 "Indel"                "IndelFR"             
+[9] "Sig3"                 "Sig8"                 "HRD"                  "Type"                
+[13] "LargeDel" 
+
+pylr::
+Z = rename(Y, c("largeDel" = "LargeDel"))
+Final_DF_HRD_DEl = rbind(X,Z)
+write.csv(Final_DF_HRD_DEl, file = "Final_DF_HRD_DEl.csv")  
+  ## Correlation relationship 
 
 
-
-
-
+cor.test(Final_DF_HRD_DEl$LargeDel, Final_DF_HRD_DEl$HRD)
+Final_DF_HRD_DEl$DelRate = Final_DF_HRD_DEl$LargeDel/Final_DF_HRD_DEl$DEL
+cor.test(Final_DF_HRD_DEl$DelRate, Final_DF_HRD_DEl$HRD)
+cor.test(Final_DF_HRD_DEl$DelRate, Final_DF_HRD_DEl$Sig3)
+Final_DF_HRD_DEl$DelRate = Final_DF_HRD_DEl$DEL/Final_DF_HRD_DEl$INS
+cor.test(Final_DF_HRD_DEl$DelRate, Final_DF_HRD_DEl$HRD)
+cor.test(Final_DF_HRD_DEl$DelRate, Final_DF_HRD_DEl$Sig3)
+cor.test(Final_DF_HRD_DEl$LargeDel, Final_DF_HRD_DEl$HRD)
